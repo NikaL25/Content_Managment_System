@@ -1,5 +1,5 @@
 from django.db import models
-from content.models import Category  # Ensure correct import
+from content.models import Category  
 
 class Menu(models.Model):
     name = models.CharField(max_length=250)

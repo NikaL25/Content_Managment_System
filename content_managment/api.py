@@ -44,13 +44,13 @@ def create_article(request, article_data: CreateArticleSchema):
             return JsonResponse({"error": "Invalid category name"}, status=400)
 
         try:
-            # Retrieve the author using the provided ID
+           
             author = CustomUser.objects.get(id=author_id)
         except CustomUser.DoesNotExist:
             return JsonResponse({"error": "Invalid author ID"}, status=400)
 
         try:
-            # Create the article
+            
             article = Article.objects.create(
                 title=title,
                 description=description,
@@ -60,7 +60,7 @@ def create_article(request, article_data: CreateArticleSchema):
                 main_image=main_image,
                 publishing=publishing
             )
-            # Add tags to the article
+           
             article.tags.add(*tags)
             return JsonResponse({"article": ArticleSchema(article)})
         except Exception as e:
@@ -190,7 +190,7 @@ def register(request, username: str, email: str, password: str, profile_picture:
     user.description = description
     user.save()
     
-    # Optionally, you can automatically login the user after registration
+    
     login(request, user)
     
     return "Registration successful"
@@ -202,7 +202,7 @@ def get_registration_form(request):
             {"name": "username", "type": "text", "label": "Username"},
             {"name": "email", "type": "email", "label": "Email"},
             {"name": "password", "type": "password", "label": "Password"}
-            # Add more fields as needed
+            
         ]
     }
     return registration_form
@@ -221,7 +221,7 @@ def get_login_form(request):
         "fields": [
             {"name": "username", "type": "text", "label": "Username"},
             {"name": "password", "type": "password", "label": "Password"}
-            # Add more fields as needed
+           
         ]
     }
     return login_form
